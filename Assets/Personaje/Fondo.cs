@@ -58,39 +58,55 @@ public class Fondo : MonoBehaviour
                             Vector3 posMunecaIzq = manager.GetRawSkeletonJointPos(userId, 6);
                             Vector3 posHipDer = manager.GetRawSkeletonJointPos(userId, 16);
                             Vector3 posHipIzq = manager.GetRawSkeletonJointPos(userId, 12);
-                            
-                            
-                            medida = Mathf.Sqrt(Mathf.Abs(posHombroIzq.x - posHombroDer.x) + Mathf.Abs(posHombroDer.z - posHombroIzq.z));
-                            print("Distancia espalda: " + medida);
 
-                            if (posMunecaDer != Vector3.zero)
+                           
+
+
+                            if (posHombroDer != Vector3.zero && posHombroIzq != Vector3.zero)
                             {
-                                float medida2 = Mathf.Sqrt(Mathf.Abs(posMunecaDer.x - posHombroDer.x) + Mathf.Abs(posHombroDer.y - posMunecaDer.y));
-                                print("Muñeca - Hombro Derecha: " + medida2);
+                                medida = Mathf.Sqrt(Mathf.Sqrt(posHombroIzq.x - posHombroDer.x) + Mathf.Sqrt(posHombroDer.z - posHombroIzq.z) + Mathf.Sqrt(posHombroDer.y - posHombroIzq.y));
+                                medida = (posHombroIzq - posHombroDer).magnitude;
+                                print("Distancia espalda: " + medida);
+
+                                
+
+                                if (posMunecaDer != Vector3.zero)
+                                {
+                                    float medida2 = Mathf.Sqrt(Mathf.Sqrt(posMunecaDer.x - posHombroDer.x) + Mathf.Sqrt(posHombroDer.y - posMunecaDer.y) + Mathf.Sqrt(posHombroDer.z - posMunecaDer.z));
+                                    medida2 = (posMunecaDer - posHombroDer).magnitude;
+                                    print("Muñeca - Hombro Derecha: " + medida2);
+                                }
+                                else
+                                {
+                                    print("No se encontraron suficientes datos para medir: Muñeca - Hombro Derecha");
+                                }
+
+                                if (posMunecaIzq != Vector3.zero)
+                                {
+                                    float medida2 = Mathf.Sqrt(Mathf.Sqrt(posMunecaIzq.x - posHombroIzq.x) + Mathf.Sqrt(posHombroIzq.y - posMunecaIzq.y) + Mathf.Sqrt(posHombroIzq.z - posMunecaIzq.z));
+                                    medida2 = (posHombroIzq - posMunecaIzq).magnitude;
+                                    print("Muñeca - Hombro Izquierda: " + medida2);
+                                }
+                                else
+                                {
+                                    print("No se encontraron suficientes datos para medir: Muñeca - Hombro Izquierda");
+                                }
+
+                                if (posHipIzq != Vector3.zero || posHipDer != Vector3.zero)
+                                {
+                                    float medida2 = Mathf.Sqrt(Mathf.Sqrt(posHipIzq.x - posHipDer.x) + Mathf.Sqrt(posHipIzq.y - posHipDer.y) + Mathf.Sqrt(posHipIzq.z - posHipDer.z));
+                                    medida2 = (posHipIzq - posHipDer).magnitude;
+                                    print("Cintura: " + medida2);
+                                }
+                                else
+                                {
+                                    print("No se encontraron suficientes datos para medir: cintura");
+                                }
                             }
                             else
                             {
-                                print("No se encontraron suficientes datos para medir: Muñeca - Hombro Derecha");
-                            }
-
-                            if (posMunecaIzq != Vector3.zero)
-                            {
-                                float medida2 = Mathf.Sqrt(Mathf.Abs(posMunecaIzq.x - posHombroIzq.x) + Mathf.Abs(posHombroIzq.y - posMunecaIzq.y));
-                                print("Muñeca - Hombro Izquierda: " + medida2);
-                            }
-                            else
-                            {
-                                print("No se encontraron suficientes datos para medir: Muñeca - Hombro Izquierda");
-                            }
-
-                            if (posHipIzq != Vector3.zero || posHipDer != Vector3.zero)
-                            {
-                                float medida2 = Mathf.Sqrt(Mathf.Abs(posHipIzq.x - posHipDer.x) + Mathf.Abs(posHipIzq.z - posHipDer.z));
-                                print("Cintura: " + medida2);
-                            }
-                            else
-                            {
-                                print("No se encontraron suficientes datos para medir: cintura");
+                                medida = 0.01f;
+                                print("No se encontraron datos suficientes");
                             }
 
                         }
@@ -105,17 +121,13 @@ public class Fondo : MonoBehaviour
 
                        
 
-                        
-
-                        //						Vector3 localPos = new Vector3(scaleX * 10f - 5f, 0f, scaleY * 10f - 5f); // 5f is 1/2 of 10f - size of the plane
-                        //						Vector3 vPosOverlay = backgroundImage.transform.TransformPoint(localPos);
-                        //Vector3 vPosOverlay = BottomLeft + ((vRight * scaleX) + (vUp * scaleY));
 
 
                         if (OverlayObject)
                         {
                             Vector3 vPosOverlay = Camera.main.ViewportToWorldPoint(new Vector3(scaleX, scaleY, distanceToCamera));
                             OverlayObject.transform.position = Vector3.Lerp(OverlayObject.transform.position, vPosOverlay, smoothFactor * Time.deltaTime);
+                            OverlayObject.transform.localScale = posJoint;
                         }
                     }
                 }

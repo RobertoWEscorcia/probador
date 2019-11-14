@@ -506,7 +506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 1900317103}
-  TrackedJoint: 4
+  TrackedJoint: 2
   OverlayObject: {fileID: 2097303576}
   smoothFactor: 5
 --- !u!124 &534669908
