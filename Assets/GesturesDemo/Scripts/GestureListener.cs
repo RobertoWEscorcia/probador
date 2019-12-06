@@ -1,19 +1,19 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 public class GestureListener : MonoBehaviour, KinectGestures.GestureListenerInterface
 {
-	// GUI Text to display the gesture messages.
-	public GUIText GestureInfo;
+    public Text gestos;
 	
 	private bool swipeLeft;
 	private bool swipeRight;
-
 	
 	public bool IsSwipeLeft()
 	{
-		if(swipeLeft)
+        print("izquierda?");
+        if (swipeLeft)
 		{
 			swipeLeft = false;
 			return true;
@@ -24,7 +24,8 @@ public class GestureListener : MonoBehaviour, KinectGestures.GestureListenerInte
 	
 	public bool IsSwipeRight()
 	{
-		if(swipeRight)
+        print("derecha?");
+        if (swipeRight)
 		{
 			swipeRight = false;
 			return true;
@@ -36,23 +37,25 @@ public class GestureListener : MonoBehaviour, KinectGestures.GestureListenerInte
 	
 	public void UserDetected(uint userId, int userIndex)
 	{
-		// detect these user specific gestures
-		KinectManager manager = KinectManager.Instance;
+        print("usuario detectado");
+        // detect these user specific gestures
+        KinectManager manager = KinectManager.Instance;
 		
 		manager.DetectGesture(userId, KinectGestures.Gestures.SwipeLeft);
 		manager.DetectGesture(userId, KinectGestures.Gestures.SwipeRight);
 
-		if(GestureInfo != null)
+		if(gestos != null)
 		{
-			GestureInfo.GetComponent<GUIText>().text = "Swipe left or right to change the slides.";
+			gestos.text = "Swipe left or right to change the slides.";
 		}
 	}
 	
 	public void UserLost(uint userId, int userIndex)
 	{
-		if(GestureInfo != null)
+        print("usuario perdido");
+        if (gestos != null)
 		{
-			GestureInfo.GetComponent<GUIText>().text = string.Empty;
+			gestos.text = "";
 		}
 	}
 
@@ -65,10 +68,12 @@ public class GestureListener : MonoBehaviour, KinectGestures.GestureListenerInte
 	public bool GestureCompleted (uint userId, int userIndex, KinectGestures.Gestures gesture, 
 	                              KinectWrapper.NuiSkeletonPositionIndex joint, Vector3 screenPos)
 	{
+
+        print("gesto completo");
 		string sGestureText = gesture + " detected";
-		if(GestureInfo != null)
+		if(gestos != null)
 		{
-			GestureInfo.GetComponent<GUIText>().text = sGestureText;
+			gestos.text = sGestureText;
 		}
 		
 		if(gesture == KinectGestures.Gestures.SwipeLeft)
@@ -82,8 +87,9 @@ public class GestureListener : MonoBehaviour, KinectGestures.GestureListenerInte
 	public bool GestureCancelled (uint userId, int userIndex, KinectGestures.Gestures gesture, 
 	                              KinectWrapper.NuiSkeletonPositionIndex joint)
 	{
-		// don't do anything here, just reset the gesture state
-		return true;
+        // don't do anything here, just reset the gesture state
+        print("gesto cancelado");
+        return true;
 	}
 	
 }

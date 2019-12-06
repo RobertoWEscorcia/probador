@@ -819,7 +819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b1b10ec54ed18a4a9fd436da22030b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GestureInfo: {fileID: 1518493332}
+  gestos: {fileID: 0}
 --- !u!1 &1910737567
 GameObject:
   m_ObjectHideFlags: 0
