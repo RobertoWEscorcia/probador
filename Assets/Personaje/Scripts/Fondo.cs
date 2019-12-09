@@ -112,7 +112,7 @@ public class Fondo : MonoBehaviour
                         if (posMunecaDer.y > posHombroDer.y && posMunecaDer != Vector3.zero)
                         {
                             contMenuDer++;
-                            if (contMenuDer > 100)
+                            if (contMenuDer > tiempoClick)
                             {
                                 MenuDerecha.SetActive(!MenuDerecha.activeSelf);
                                 contMenuDer = 0;
@@ -122,7 +122,7 @@ public class Fondo : MonoBehaviour
                         if (posMunecaIzq.y > posHombroIzq.y && posMunecaIzq != Vector3.zero)
                         {
                             contMenuIzq++;
-                            if (contMenuIzq > 100)
+                            if (contMenuIzq > tiempoClick)
                             {
                                 MenuIzquierda.SetActive(!MenuIzquierda.activeSelf);
                                 contMenuIzq = 0;
@@ -140,7 +140,7 @@ public class Fondo : MonoBehaviour
                         if (MenuDerecha.activeSelf)
                         {
                             
-                            if (posMunecaDer.y > (posHipDer.y + (espacioDer / 3) * 2))
+                            if (posMunecaDer.y > (posHipDer.y + (espacioDer / 3) * 2) && posMunecaDer.y < posHombroDer.y)
                             {
                                 tiempoDer2 = 0; tiempoDer3 = 0;
                                 print("Menu der 1 " + tiempoDer1);
@@ -183,7 +183,7 @@ public class Fondo : MonoBehaviour
                         if (MenuIzquierda.activeSelf)
                         {
                             //Parte inferior para quitar prenda
-                            if(posMunecaIzq.y > (posHipIzq.y + (espacioIzq / 3) * 2))
+                            if(posMunecaIzq.y > (posHipIzq.y + (espacioIzq / 3) * 2) && posMunecaIzq.y < posHombroIzq.y)
                             {
                                 tiempoIzq2 = 0; tiempoIzq3 = 0;
                                 print("Menu 1 " + tiempoIzq1);
@@ -270,7 +270,7 @@ public class Fondo : MonoBehaviour
 
                                 conn.Consulta("usuarios");
 
-                                textoAltura.text = "Tu altura es " + user.GetAltura();
+                                textoAltura.text = "Tu altura es " + altura;
 
                             }
                             else
