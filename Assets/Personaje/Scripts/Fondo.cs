@@ -10,7 +10,7 @@ public class Fondo : MonoBehaviour
     //public GameObject cursor2;
 
     public GUITexture backgroundImage;
-    public KinectWrapper.NuiSkeletonPositionIndex TrackedJoint = KinectWrapper.NuiSkeletonPositionIndex.HandRight;
+    public KinectWrapper.NuiSkeletonPositionIndex trackedJoint = KinectWrapper.NuiSkeletonPositionIndex.HandRight;
     public GameObject personaje;
 
     public GameObject tshirt;
@@ -23,13 +23,12 @@ public class Fondo : MonoBehaviour
     public GameObject datosUsuario;
 
     private ManejadorGestos gesture;
-
     public float smoothFactor = 5f;
 
-    public GameObject MenuDerecha;
-    public GameObject MenuIzquierda;
+    public GameObject menuDerecha;
+    public GameObject menuIzquierda;
 
-    private float hombros = 0, codo_muneca_der = 0, codo_muneca_izq = 0, hombro_codo_der = 0, hombro_codo_izq = 0, cadera = 0, altura = 0;
+    private float hombros = 0, codoMunecaDer = 0, codoMunecaIzq = 0, hombroCodoDer = 0, hombroCodoIzq = 0, cadera = 0, altura = 0;
 
     private float distanceToCamera = 10f;
     private Usuario user;
@@ -64,8 +63,8 @@ public class Fondo : MonoBehaviour
     void Update()
     {
         
-        KinectManager manager = ManejadorKinect.GetKinectManager();
-        
+        KinectManager manager = KinectManager.Instance;
+
         if (manager && manager.IsInitialized())
         {
             
@@ -74,7 +73,7 @@ public class Fondo : MonoBehaviour
             {
                 backgroundImage.texture = manager.GetUsersClrTex();
             }
-            int iJointIndex = (int)TrackedJoint;
+            int iJointIndex = (int)trackedJoint;
 
             if (manager.IsUserDetected())
             {
@@ -114,7 +113,7 @@ public class Fondo : MonoBehaviour
                             contMenuDer++;
                             if (contMenuDer > tiempoClick)
                             {
-                                MenuDerecha.SetActive(!MenuDerecha.activeSelf);
+                                menuDerecha.SetActive(!menuDerecha.activeSelf);
                                 contMenuDer = 0;
                             }
                         }
@@ -124,7 +123,7 @@ public class Fondo : MonoBehaviour
                             contMenuIzq++;
                             if (contMenuIzq > tiempoClick)
                             {
-                                MenuIzquierda.SetActive(!MenuIzquierda.activeSelf);
+                                menuIzquierda.SetActive(!menuIzquierda.activeSelf);
                                 contMenuIzq = 0;
                             }
                         }
@@ -137,7 +136,7 @@ public class Fondo : MonoBehaviour
                         print(manager.getProfundidadArticulacion(posMunecaDer));
 
 
-                        if (MenuDerecha.activeSelf)
+                        if (menuDerecha.activeSelf)
                         {
                             
                             if (posMunecaDer.y > (posHipDer.y + (espacioDer / 3) * 2) && posMunecaDer.y < posHombroDer.y)
@@ -180,7 +179,7 @@ public class Fondo : MonoBehaviour
                         }
                        
 
-                        if (MenuIzquierda.activeSelf)
+                        if (menuIzquierda.activeSelf)
                         {
                             //Parte inferior para quitar prenda
                             if(posMunecaIzq.y > (posHipIzq.y + (espacioIzq / 3) * 2) && posMunecaIzq.y < posHombroIzq.y)
@@ -232,22 +231,22 @@ public class Fondo : MonoBehaviour
 
                                 if (posCodoDer != Vector3.zero)
                                 {
-                                    hombro_codo_der = Mathf.Sqrt(Mathf.Pow(posCodoDer.x - posHombroDer.x, 2) + Mathf.Pow(posHombroDer.y - posCodoDer.y, 2) + Mathf.Pow(posHombroDer.z - posCodoDer.z, 2));   
+                                    hombroCodoDer = Mathf.Sqrt(Mathf.Pow(posCodoDer.x - posHombroDer.x, 2) + Mathf.Pow(posHombroDer.y - posCodoDer.y, 2) + Mathf.Pow(posHombroDer.z - posCodoDer.z, 2));   
                                 }
 
                                 if (posCodoIzq != Vector3.zero)
                                 {
-                                    hombro_codo_izq = Mathf.Sqrt(Mathf.Pow(posCodoIzq.x - posHombroIzq.x, 2) + Mathf.Pow(posHombroIzq.y - posCodoIzq.y, 2) + Mathf.Pow(posHombroIzq.z - posCodoIzq.z, 2));
+                                    hombroCodoIzq = Mathf.Sqrt(Mathf.Pow(posCodoIzq.x - posHombroIzq.x, 2) + Mathf.Pow(posHombroIzq.y - posCodoIzq.y, 2) + Mathf.Pow(posHombroIzq.z - posCodoIzq.z, 2));
                                 }
 
 
                                 if (posMunecaIzq != Vector3.zero)
                                 {
-                                    codo_muneca_izq = Mathf.Sqrt(Mathf.Pow(posMunecaIzq.x - posCodoIzq.x, 2) + Mathf.Pow(posCodoIzq.y - posMunecaIzq.y, 2) + Mathf.Pow(posCodoIzq.z - posMunecaIzq.z, 2));
+                                    codoMunecaIzq = Mathf.Sqrt(Mathf.Pow(posMunecaIzq.x - posCodoIzq.x, 2) + Mathf.Pow(posCodoIzq.y - posMunecaIzq.y, 2) + Mathf.Pow(posCodoIzq.z - posMunecaIzq.z, 2));
                                 }
                                 if (posMunecaDer != Vector3.zero)
                                 {
-                                    codo_muneca_der = Mathf.Sqrt(Mathf.Pow(posMunecaDer.x - posCodoDer.x, 2) + Mathf.Pow(posCodoDer.y - posMunecaDer.y, 2) + Mathf.Pow(posCodoDer.z - posMunecaDer.z, 2));
+                                    codoMunecaDer = Mathf.Sqrt(Mathf.Pow(posMunecaDer.x - posCodoDer.x, 2) + Mathf.Pow(posCodoDer.y - posMunecaDer.y, 2) + Mathf.Pow(posCodoDer.z - posMunecaDer.z, 2));
                                 }
 
 
@@ -263,7 +262,7 @@ public class Fondo : MonoBehaviour
                                 }
 
 
-                                user.SetAll(altura, cadera, hombros, codo_muneca_der, codo_muneca_izq, hombro_codo_der, hombro_codo_izq);
+                                user.SetAll(altura, cadera, hombros, codoMunecaDer, codoMunecaIzq, hombroCodoDer, hombroCodoIzq);
 
                                 string json = JsonUtility.ToJson(user);
                                 conn.Agregar("usuarios", json);

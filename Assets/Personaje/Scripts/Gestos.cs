@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gestos : MonoBehaviour
 {
-    public List<Material> Materiales;
+    public List<Material> materiales;
     private ManejadorGestos gestureListener;
 
     public List<GameObject> prenda;
@@ -17,11 +17,11 @@ public class Gestos : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        prenda[1].GetComponent<Renderer>().material = Materiales[1];
+        prenda[1].GetComponent<Renderer>().material = materiales[1];
         gestureListener = ManejadorGestos.GetManejadorGestos();
 
 
-        cantidadMateriales = Materiales.Count;
+        cantidadMateriales = materiales.Count;
 
         conn = (new GameObject("gos")).AddComponent<ConexionBD>();
         user = Usuario.GetUsuario();
@@ -54,26 +54,26 @@ public class Gestos : MonoBehaviour
 
     public void Votar(int voto)
     {   //Concatenar el usuario / voto / id_prenda
-        conn.Agregar("votos", "{\"id_usuarios\" : " + user.id_usuarios +", \"voto\" :" + voto + ", \"id_prendas\" : " + "2" + "}");
+        conn.Agregar("votos", "{\"id_usuarios\" : " + user.idUsuarios +", \"voto\" :" + voto + ", \"id_prendas\" : " + "2" + "}");
         gestureListener.ChangeVote();
     }
     public void MaterialSiguiente()
     {
         valorMaterial++;
         valorMaterial = valorMaterial % cantidadMateriales;
-        prenda[1].GetComponent<Renderer>().material = Materiales[valorMaterial];
+        prenda[1].GetComponent<Renderer>().material = materiales[valorMaterial];
         gestureListener.ChangeRight();
     }
 
     public void MaterialAnterior()
     {
         valorMaterial--;
-        valorMaterial = valorMaterial % cantidadMateriales;
+        valorMaterial= valorMaterial % cantidadMateriales;
         if(valorMaterial < 0)
         {
             valorMaterial *= -1;
         }
-        prenda[1].GetComponent<Renderer>().material = Materiales[valorMaterial];
+        prenda[1].GetComponent<Renderer>().material = materiales[valorMaterial];
         gestureListener.ChangeLeft();
     }
 }

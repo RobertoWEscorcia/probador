@@ -50,7 +50,7 @@ public class ConexionBD : MonoBehaviour
             {
                 string datos = webRequest.downloadHandler.text;
                 ClassUsuario users = JsonUtility.FromJson<ClassUsuario>("{\"listaUsuario\": " + datos + "}");
-                user.id_usuarios = users.listaUsuario[0].id_usuarios;  
+                user.idUsuarios = users.listaUsuario[0].idUsuarios;  
             }
 
         }

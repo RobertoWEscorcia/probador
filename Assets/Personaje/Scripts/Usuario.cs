@@ -7,35 +7,37 @@ public class Usuario
 {
     private static Usuario user = null;
 
+
+    //Probar si funciona con private, en caso sí cambiar diagrama de clases
     public float altura;
     public float cadera;
-    public float hombro_hombro;
-    public float codo_muneca_der;
-    public float codo_muneca_izq;
-    public float hombro_codo_izq;
-    public float hombro_codo_der;
-    public int id_usuarios;
+    public float hombroHombro;
+    public float codoMunecaDer;
+    public float codoMunecaIzq;
+    public float hombroCodoIzq;
+    public float hombroCodoDer;
+    public int idUsuarios;
 
     
     public float GetAltura() { return altura; }
     public float GetCadera() { return cadera; }
-    public float GetHombro_hombro() { return hombro_hombro; }
-    public float GetCodo_muneca_der() { return codo_muneca_der; }
-    public float GetCodo_muneca_izq() { return codo_muneca_izq; }
-    public float GetHombro_codo_izq() { return hombro_codo_izq; }
-    public float GetHombro_codo_der() { return hombro_codo_der; }
-    public float GetBrazo_der() { return hombro_codo_der + codo_muneca_der; }
-    public float GetBrazo_izq() { return hombro_codo_izq + codo_muneca_izq; }
-    public int GetId() { return id_usuarios; }
+    public float GetHombroHombro() { return hombroHombro; }
+    public float GetCodoMunecaDer() { return codoMunecaDer; }
+    public float GetCodoMunecaIzq() { return codoMunecaIzq; }
+    public float GetHombroCodoIzq() { return hombroCodoIzq; }
+    public float GetHombroCodoDer() { return hombroCodoDer; }
+    public float GetBrazoDer() { return hombroCodoDer + codoMunecaDer; }
+    public float GetBrazoIzq() { return hombroCodoIzq + codoMunecaIzq; }
+    public int GetId() { return idUsuarios; }
 
     public void SetAltura(float _altura) { altura = _altura; }
     public void SetCadera(float _cadera) { cadera = _cadera; }
-    public void SetHombro_hombro(float _hombro_hombro) { hombro_hombro = _hombro_hombro; }
-    public void SetCod_muneca_der(float _codo_muneca_der) { codo_muneca_der = _codo_muneca_der; }
-    public void SetCodo_muneca_izq(float _codo_muneca_izq) { codo_muneca_izq = _codo_muneca_izq; }
-    public void SetHombro_codo_der(float _hombro_codo_der) { hombro_codo_der = _hombro_codo_der; }
-    public void SetHombro_codo_izq(float _hombro_codo_izq) { hombro_codo_izq = _hombro_codo_izq; }
-    public void SetId(int _id) { id_usuarios = _id; }
+    public void SetHombroHombro(float _hombro_hombro) { hombroHombro = _hombro_hombro; }
+    public void SetCodoMunecaDer(float _codo_muneca_der) { codoMunecaDer = _codo_muneca_der; }
+    public void SetCodoMunecaIzq(float _codo_muneca_izq) { codoMunecaIzq = _codo_muneca_izq; }
+    public void SetHombroCodoDer(float _hombro_codo_der) { hombroCodoDer = _hombro_codo_der; }
+    public void SetHombroCodoIzq(float _hombro_codo_izq) { hombroCodoIzq = _hombro_codo_izq; }
+    public void SetId(int _id) { idUsuarios = _id; }
 
     private Usuario()
     {
@@ -56,11 +58,11 @@ public class Usuario
     {
         altura = _altura;
         cadera = _cadera;
-        hombro_hombro = _hombro_hombro;
-        hombro_codo_der = _hombro_codo_der;
-        hombro_codo_izq = _hombro_codo_izq;
-        codo_muneca_der = _codo_muneca_der;
-        codo_muneca_izq = _codo_muneca_izq;
+        hombroHombro = _hombro_hombro;
+        hombroCodoDer = _hombro_codo_der;
+        hombroCodoIzq = _hombro_codo_izq;
+        codoMunecaDer = _codo_muneca_der;
+        codoMunecaIzq = _codo_muneca_izq;
     }
     
 
