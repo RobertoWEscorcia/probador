@@ -94,6 +94,7 @@
     <Compile Include="Assets\Personaje\Scripts\Fondo.cs" />
     <Compile Include="Assets\Personaje\Scripts\Gestos.cs" />
     <Compile Include="Assets\Personaje\Scripts\ManejadorGestos.cs" />
+    <Compile Include="Assets\Personaje\Scripts\ManejadorKinect.cs" />
     <Compile Include="Assets\Personaje\Scripts\Usuario.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Practicas/Downloads/recognition/Introduction-to-using-OpenCV-with-Unity/Complete/Probador/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
