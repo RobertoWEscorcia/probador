@@ -63,8 +63,8 @@ public class Fondo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        KinectManager manager = ManejadorKinect.GetKinectManager();
+
+        KinectManager manager = KinectManager.Instance;
         
         if (manager && manager.IsInitialized())
         {
